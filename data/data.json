@@ -1,0 +1,33 @@
+{
+    "news": [
+      {
+        "title": "Thời tiết hôm nay: Nắng nóng kéo dài",
+        "category": "Thời sự"
+      },
+      {
+        "title": "Công nghệ AI đang thay đổi thế giới",
+        "category": "Công nghệ"
+      },
+      {
+        "title": "Đội tuyển Việt Nam chuẩn bị cho giải đấu quốc tế",
+        "category": "Thể thao"
+      },
+      {
+        "title": "Học cách làm bánh trung thu tại nhà",
+        "category": "Đời sống"
+      },
+      {
+        "title": "Thị trường chứng khoán tăng điểm trở lại",
+        "category": "Kinh tế"
+      }
+    ],
+    "student":[
+        {
+            "name": "linh",
+            "age"  : 23,
+            "address":"jfdnvdjksbvkjdsv"
+
+        }
+    ]
+  }
+  
