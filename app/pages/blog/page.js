@@ -5,36 +5,36 @@ import { db } from '../../libs/firebase'; // Import Firestore
 import { List, Card, Spin, message } from 'antd'; // Ant Design components for displaying data
 import { collection, query, where, getDocs } from 'firebase/firestore'; // Firestore query methods
 
-function News() {
+function LawPage() {
   const [posts, setPosts] = useState([]); // State to hold the fetched posts
   const [loading, setLoading] = useState(true); // State to manage loading state
 
-  // Fetch "Tin tức" category posts from Firestore
-  const fetchNewsPosts = async () => {
+  // Fetch "Pháp luật" category posts from Firestore
+  const fetchLawPosts = async () => {
     setLoading(true);
 
     try {
-      // Query Firestore for posts where category is 'news' (Tin tức)
-      const q = query(collection(db, "news"));
+      // Query Firestore for posts where category is 'law'
+      const q = query(collection(db, "blog"));
       const querySnapshot = await getDocs(q);
 
-      const newsPosts = [];
+      const lawPosts = [];
       querySnapshot.forEach((doc) => {
-        newsPosts.push({ id: doc.id, ...doc.data() });
+        lawPosts.push({ id: doc.id, ...doc.data() });
       });
 
-      setPosts(newsPosts); // Set posts data
+      setPosts(lawPosts); // Set posts data
       setLoading(false); // Stop loading
     } catch (error) {
-      console.error("Error fetching news posts:", error);
-      message.error("Error fetching news posts");
+      console.error("Error fetching law posts:", error);
+      message.error("Error fetching law posts");
       setLoading(false); // Stop loading on error
     }
   };
 
   // Use effect to fetch posts when the component mounts
   useEffect(() => {
-    fetchNewsPosts(); // Fetch posts when the page loads
+    fetchLawPosts(); // Fetch posts when the page loads
   }, []);
 
   // While data is loading, show the loading spinner
@@ -48,7 +48,7 @@ function News() {
 
   return (
     <div className="container mx-auto p-6">
-      <h2 className="text-2xl font-semibold text-center mb-4">Tin tức - Posts</h2>
+      <h2 className="text-2xl font-semibold text-center mb-4">Pháp luật - Posts</h2>
 
       {/* Display posts in a list */}
       {posts.length > 0 ? (
@@ -66,10 +66,10 @@ function News() {
           )}
         />
       ) : (
-        <p>No posts available in the Tin tức category.</p>
+        <p>No posts available in the Pháp luật category.</p>
       )}
     </div>
   );
 }
 
-export default News;
+export default LawPage;

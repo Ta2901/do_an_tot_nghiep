@@ -1,11 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import Header from "./components/Header";
-import data from  '@/data/data.json'
 
 export default function Page  () {
   return (
     <div >
    <Header />
-      <img src="/home.png "/>
+      <img src="/home.png " alt="home"/>
 
       <div className="grid  grid-rows-5 gap-4 h-screen mx-24  mt-8 max-w-7xl text-xl text-black">
   <div className="bg-[#D9D9D9] col-span-1 row-span-1 flex items-center justify-center">

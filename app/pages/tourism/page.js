@@ -5,7 +5,7 @@ import { db } from '../../libs/firebase'; // Import Firestore
 import { List, Card, Spin, message } from 'antd'; // Ant Design components for displaying data
 import { collection, query, where, getDocs } from 'firebase/firestore'; // Firestore query methods
 
-function News() {
+function Tourism() {
   const [posts, setPosts] = useState([]); // State to hold the fetched posts
   const [loading, setLoading] = useState(true); // State to manage loading state
 
@@ -15,7 +15,7 @@ function News() {
 
     try {
       // Query Firestore for posts where category is 'news' (Tin tức)
-      const q = query(collection(db, "news"));
+      const q = query(collection(db, "tourism"));
       const querySnapshot = await getDocs(q);
 
       const newsPosts = [];
@@ -48,7 +48,7 @@ function News() {
 
   return (
     <div className="container mx-auto p-6">
-      <h2 className="text-2xl font-semibold text-center mb-4">Tin tức - Posts</h2>
+      <h2 className="text-2xl font-semibold text-center mb-4">Du Lich</h2>
 
       {/* Display posts in a list */}
       {posts.length > 0 ? (
@@ -72,4 +72,4 @@ function News() {
   );
 }
 
-export default News;
+export default Tourism;
