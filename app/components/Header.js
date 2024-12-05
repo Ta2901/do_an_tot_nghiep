@@ -4,7 +4,7 @@ export default function Header () {
 
 <nav class="bg-[#95938A]">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="/logo.PNG" class="h-8" alt="Flowbite Logo" />
         {/* thêm chữ cạnh logo */}
         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
@@ -18,23 +18,27 @@ export default function Header () {
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul className=" flex space-x-3">
             <li className="hover:bg-[#DFDED7]   text-black px-4 hover:h-full rounded-md"> 
-                Home
+                <a>
+                    
+                </a>
             </li>
             <li className="hover:bg-[#DFDED7]  text-black px-4 rounded-md"> 
-                Tin tức
+              <a href="/pages/news">
+              Tin tức
+                </a>  
             </li>
             <li className="hover:bg-[#DFDED7]  text-black px-4 rounded-md"> 
-                Pháp luật
+               <a href="/pages/law">Pháp luật</a> 
             </li>
             <li className="hover:bg-[#DFDED7]  text-black px-4 rounded-md"> 
-                Du lịch
+                <a href="/pages/tourism" > Du lịch</a>
             </li>
               <li className="hover:bg-[#DFDED7]  text-black px-4 rounded-md"> 
-                Khác
+                <a href="/pages/more" > Khác</a>
             </li>
             
               <li className="hover:bg-[#DFDED7]  text-black px-4 rounded-md"> 
-                Blog
+               <a href="/pages/blog" > Blog</a>
             </li>
             
               <li className="bg-[#DFDED7]  border border-white  px-2 py-1 text-black rounded-md flex"> 
