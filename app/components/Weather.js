@@ -3,17 +3,17 @@ import { useState, useEffect } from "react";
 import './weather.css';
 
 export default function Weather() {
-  const [city, setCity] = useState("Seoul"); // Thành phố mặc định là Seoul
+  const [city, setCity] = useState("Seoul");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const handleCityChange = (e) => {
-    setCity(e.target.value); // Cập nhật tên thành phố khi người dùng nhập
+    setCity(e.target.value);
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Ngừng việc tải lại trang khi gửi form
+    e.preventDefault();
     fetchWeatherData();
   };
 
@@ -21,9 +21,7 @@ export default function Weather() {
     setLoading(true);
     setError(null);
 
-    // Thay YOUR_API_KEY bằng API Key của bạn
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=YOUR_VALID_API_KEY&units=metric')
-
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f50e68b7ce80b4b3f69cd445bda61db7&units=metric`)
       .then((response) => response.json())
       .then((data) => {
         if (data.cod === "404") {
@@ -33,58 +31,57 @@ export default function Weather() {
         }
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setError("Lỗi khi tải dữ liệu!");
         setLoading(false);
       });
   };
 
   useEffect(() => {
-    fetchWeatherData(); // Gọi dữ liệu thời tiết khi lần đầu render
-  }, []); // Chạy 1 lần khi component mount
+    fetchWeatherData();
+  }, []);
 
   return (
     <div className="weather-container">
-      <h2>Thời tiết hiện tại</h2>
+      <div className="weather-header">
+        <h2>Thời tiết hiện tại</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={city}
+            onChange={handleCityChange}
+            placeholder="Nhập tên thành phố"
+            className="city-input"
+          />
+          <button type="submit" className="submit-button">
+            Tìm kiếm
+          </button>
+        </form>
+      </div>
 
-      {/* Form nhập thành phố */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={city}
-          onChange={handleCityChange}
-          placeholder="Nhập tên thành phố"
-          className="city-input"
-        />
-        <button type="submit" className="submit-button">
-          Tìm kiếm
-        </button>
-      </form>
-
-      {loading && <p>Đang tải thời tiết...</p>}
-
-      {error && <p>{error}</p>}
+      {loading && <p className="loading-text">Đang tải thời tiết...</p>}
+      {error && <p className="error-text">{error}</p>}
 
       {weather && !loading && !error && (
         <div>
-          <h3>
-            {weather.name}, {weather.sys ? weather.sys.country : "Không xác định"}
-          </h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Nhiệt độ (°C)</th>
-                <th>Thời tiết</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {/* Kiểm tra nếu weather.main tồn tại trước khi truy cập */}
-                <td>{weather.main ? weather.main.temp : "Không có dữ liệu"}</td>
-                <td>{weather.weather && weather.weather[0] ? weather.weather[0].description : "Không có dữ liệu"}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="weather-main">
+            <img
+              src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+              alt="Weather Icon"
+            />
+            <div>
+              <div className="temperature">{Math.round(weather.main.temp)}°C</div>
+              <div>RealFeel: {Math.round(weather.main.feels_like)}°</div>
+            </div>
+          </div>
+
+          <div className="weather-details">
+            <div><span>Thành phố:</span><span>{weather.name}, {weather.sys.country}</span></div>
+            <div><span>Nhiều mây:</span><span>{weather.weather[0].description}</span></div>
+            <div><span>Độ ẩm:</span><span>{weather.main.humidity}%</span></div>
+            <div><span>Gió:</span><span>{weather.wind.speed} m/s</span></div>
+            <div><span>Áp suất:</span><span>{weather.main.pressure} hPa</span></div>
+          </div>
         </div>
       )}
     </div>

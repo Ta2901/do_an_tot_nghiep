@@ -1,0 +1,28 @@
+.flag-icon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 24px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.flag-icon.USD {
+    background-image: url('https://flagcdn.com/us.svg');
+}
+
+.flag-icon.EUR {
+    background-image: url('https://flagcdn.com/eu.svg');
+}
+
+.flag-icon.VND {
+    background-image: url('https://flagcdn.com/vn.svg');
+}
+
+.flag-icon.JPY {
+    background-image: url('https://flagcdn.com/jp.svg');
+}
+
+.flag-icon.GBP {
+    background-image: url('https://flagcdn.com/gb.svg');
+}

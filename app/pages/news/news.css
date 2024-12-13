@@ -66,13 +66,15 @@
 
 .div3{
  
- min-width: 59%;
+ min-width: 39%;
  height: 300px;
- 
+ overflow-y: auto; /* Thêm thanh cuộn nếu nội dung quá dài */
 }
+ 
+
 .div4{
     height: 300px;
-    min-width: 39%;
+    min-width: 59%;
 }
 .div5{
  
