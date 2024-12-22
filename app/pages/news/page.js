@@ -1,75 +1,60 @@
-"use client";
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { db } from '../../libs/firebase'; // Import Firestore
-import { List, Card, Spin, message } from 'antd'; // Ant Design components for displaying data
-import { collection, query, where, getDocs } from 'firebase/firestore'; // Firestore query methods
+import Header from '../../components/Header';
+import ExchangeRate from '../../components/ExchangeRate';
+import Weather from '../../components/Weather'; // Import Weather
+import './news.css';
 
-function News() {
-  const [posts, setPosts] = useState([]); // State to hold the fetched posts
-  const [loading, setLoading] = useState(true); // State to manage loading state
-
-  // Fetch "Tin tức" category posts from Firestore
-  const fetchNewsPosts = async () => {
-    setLoading(true);
-
-    try {
-      // Query Firestore for posts where category is 'news' (Tin tức)
-      const q = query(collection(db, "news"));
-      const querySnapshot = await getDocs(q);
-
-      const newsPosts = [];
-      querySnapshot.forEach((doc) => {
-        newsPosts.push({ id: doc.id, ...doc.data() });
-      });
-
-      setPosts(newsPosts); // Set posts data
-      setLoading(false); // Stop loading
-    } catch (error) {
-      console.error("Error fetching news posts:", error);
-      message.error("Error fetching news posts");
-      setLoading(false); // Stop loading on error
-    }
-  };
-
-  // Use effect to fetch posts when the component mounts
-  useEffect(() => {
-    fetchNewsPosts(); // Fetch posts when the page loads
-  }, []);
-
-  // While data is loading, show the loading spinner
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Spin size="large" />
+export default function New(){
+   const newsList = [
+      "Viện Kiểm sát Hàn Quốc điều tra cựu nghị sĩ đang cầm quyền về nghi ngờ can thiệp trong quá trình tiến cử",
+      "Một người Hàn Quốc nằm trong danh sách dự lễ trao giải Nobel Hòa bình 2024",
+      "Đảng cầm quyền Hàn Quốc có khả năng khởi động các cuộc thảo luận riêng với Chính phủ và giới y tế",
+      "Phó Tổng thống Mỹ chỉ trích cựu Tổng thống Donald Trump vì coi nhẹ đồng minh Hàn-Mỹ",
+      "Bắc Triều Tiên thành lập cơ quan mới đối phó với Hàn Quốc",
+  ];
+    return(
+ <div>
+    <Header/>
+    {/*hàng 1  */}
+<div className="flex justify-between mx-auto max-w-7xl container">
+   {/* Ô1  */}
+      <div className="div1">
+       <h1> Thiết quân lệnh được ban hành hại Hàn Quốc </h1>
       </div>
+   {/* Ô 2 */}
+   <div className="div2">
+            <h2 className="news-title">Tin Nóng</h2>
+            <ul className="news-list">
+                {newsList.map((item, index) => (
+                    <li key={index} className="news-item">{item}</li>
+                ))}
+            </ul>
+        </div>
+</div>
+{/* hàng 2 */}
+<div className="flex justify-between mx-auto max-w-7xl container">
+   
+   {/* Ô 3 */}
+   <div className="div3"> 
+                <Weather />
+      </div>
+   
+   
+   {/* Ô 4 */}
+   <div className="div4">
+                <ExchangeRate />
+            </div>
+
+</div>
+{/* hàng 3 */}
+<div className="flex justify-between mx-auto max-w-7xl container">
+   {/* Ô 5 */}
+   <div className="div5"> 3</div>
+   {/* Ô 6 */}
+   <div className="div6">4</div>
+</div>
+ </div>
+
+
     );
-  }
 
-  return (
-    <div className="container mx-auto p-6">
-      <h2 className="text-2xl font-semibold text-center mb-4">Tin tức - Posts</h2>
-
-      {/* Display posts in a list */}
-      {posts.length > 0 ? (
-        <List
-          grid={{ gutter: 16, column: 3 }} // Display posts in 3 columns
-          dataSource={posts}
-          renderItem={(item) => (
-            <List.Item>
-              <Card title={item.title}>
-                <p>{item.description}</p>
-                <p>Category: {item.category}</p>
-                <p>{new Date(item.createdAt.seconds * 1000).toLocaleDateString()}</p>
-              </Card>
-            </List.Item>
-          )}
-        />
-      ) : (
-        <p>No posts available in the Tin tức category.</p>
-      )}
-    </div>
-  );
 }
-
-export default News;

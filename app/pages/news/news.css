@@ -1,0 +1,87 @@
+.container {
+    display: flex;
+    margin: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+}
+
+.div1, .div2, .div3, .div4, .div5, .div6 {
+    background-color: #ffffff; /* Màu nền chung */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Đảm bảo nội dung không tràn */
+}
+.div1{
+
+
+   
+ min-width: 68%;
+ height: 600px;
+}
+.div2 {
+    background-color: #f9f9f9; /* Màu nền */
+    border: 1px solid #ddd; /* Đường viền bao quanh */
+    border-radius: 8px; /* Góc bo tròn */
+    padding: 16px; /* Khoảng cách trong */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
+    height: 600px; /* Chiều cao ô */
+    overflow-y: auto; /* Thêm thanh cuộn nếu nội dung quá dài */
+}
+
+.news-title {
+    color: #d32f2f; /* Màu đỏ cho tiêu đề */
+    font-size: 1.5rem; /* Kích thước chữ tiêu đề */
+    font-weight: bold;
+    border-bottom: 2px solid #d32f2f; /* Gạch đỏ bên dưới tiêu đề */
+    margin-bottom: 16px;
+    padding-bottom: 4px;
+    text-align: center; /* Căn giữa tiêu đề */
+}
+
+.news-list {
+    list-style-type: none; /* Loại bỏ chấm đầu dòng mặc định */
+    margin: 0;
+    padding: 0;
+}
+
+.news-item {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 20px; /* Chừa không gian cho dấu chấm tròn */
+}
+
+.news-item::before {
+    content: "•"; /* Dấu chấm tròn */
+    color: #d32f2f; /* Màu đỏ */
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.div3{
+ 
+ min-width: 39%;
+ height: 300px;
+ overflow-y: auto; /* Thêm thanh cuộn nếu nội dung quá dài */
+}
+ 
+
+.div4{
+    height: 300px;
+    min-width: 59%;
+}
+.div5{
+ 
+    min-width: 39%;
+    height: 600px;
+   }
+.div6{
+       height: 600px;
+       min-width: 59%;
+   }

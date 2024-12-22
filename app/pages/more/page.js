@@ -81,17 +81,24 @@ export default function Page() {
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
             }}
         >
-            <img src="/clb.png" alt="Image 4" style={{ width: '100%', borderRadius: '5px' }} />
-            <p style={{ color: '#000' }}>Câu lạc bộ</p>
-        </div>
-        <div
-            style={{
-                padding: '10px',
-                backgroundColor: '#fff',
-                borderRadius: '10px',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            }}
-        >
+            <div
+    style={{
+        padding: '10px',
+        backgroundColor: '#fff',
+        borderRadius: '10px',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    }}
+>
+    <a href="app/pages/bai_viet" style={{ textDecoration: 'none' }}>
+        <img
+            src="/clb.png"
+            alt="Image 4"
+            style={{ width: '100%', borderRadius: '5px' }}
+        />
+        <p style={{ color: '#000', textAlign: 'center' }}>Câu lạc bộ</p>
+    </a>
+</div>
+
             <img src="/volunteer.png" alt="Image 5" style={{ width: '100%', borderRadius: '5px' }} />
             <p style={{ color: '#000' }}>Hoạt động tình nguyện</p>
         </div>
