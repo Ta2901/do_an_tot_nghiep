@@ -34,8 +34,8 @@ export default function Header() {
   // Menu for the dropdown
   const menu = (
     <Menu>
-      <Menu.Item icon={<UserOutlined />} onClick={() => router.push('/profile')}>
-        Personal Info
+      <Menu.Item icon={<UserOutlined />} onClick={() => router.push('/pages/manage')}>
+        Manage
       </Menu.Item>
       <Menu.Item icon={<LogoutOutlined className="text-red-500" />} onClick={handleLogout}>
         <span className="text-red-500">Logout</span>

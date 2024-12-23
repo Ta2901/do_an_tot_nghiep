@@ -1,154 +1,158 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, db, storage } from '../../libs/firebase';
-import { message, Modal, Button, Input, Form, Select, Upload, Spin, Table, Popconfirm, Card } from 'antd';
-import { addDoc, collection, getDocs, deleteDoc, updateDoc, doc } from 'firebase/firestore';
-import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
-import { v4 as uuidv4 } from 'uuid';
-import Header from '../../components/Header';
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, db } from "../../libs/firebase";
+import {
+  message,
+  Modal,
+  Button,
+  Input,
+  Form,
+  Select,
+  Spin,
+  Table,
+  Popconfirm,
+  Card,
+} from "antd";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  deleteDoc,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
+import Header from "../../components/Header";
 
 const categories = [
-  { label: 'News', value: 'news' },
-  { label: 'Law', value: 'law' },
-  { label: 'Tourism', value: 'tourism' },
-  { label: 'Blog', value: 'blog' },
+  { label: "News", value: "news" },
+  { label: "Law", value: "law" },
+  { label: "Tourism", value: "tourism" },
+  { label: "Blog", value: "blog" },
 ];
 
 const Manage = () => {
-  const [user, loadingUser] = useAuthState(auth); // Fetch the current user
-  const [loading, setLoading] = useState(false); // State to track loading
-  const [data, setData] = useState([]); // State to store fetched data
-  const [isModalVisible, setIsModalVisible] = useState(false); // Modal visibility
-  const [editRecord, setEditRecord] = useState(null); // Record being edited
-  const [imageUrl, setImageUrl] = useState(null); // Image URL state for uploaded images
-  const [category, setCategory] = useState('news'); // Default category
+  const [user, loadingUser] = useAuthState(auth);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editRecord, setEditRecord] = useState(null);
+  const [category, setCategory] = useState("news");
 
   // Fetch data when user logs in or category changes
   useEffect(() => {
-    if (user) {
-      fetchData();
-    }
+    if (user) fetchData();
   }, [user, category]);
 
-  // Fetch data from Firestore based on selected category
   const fetchData = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, category));
       const fetchedData = [];
-      querySnapshot.forEach(doc => {
+      querySnapshot.forEach((doc) => {
         fetchedData.push({ ...doc.data(), id: doc.id });
       });
       setData(fetchedData);
     } catch (error) {
-      console.error('Error fetching data: ', error);
-      message.error('Error fetching data');
+      message.error("Error fetching data");
     }
   };
 
-  // Handle form submission to create or update data
   const handleFormSubmit = async (values) => {
     setLoading(true);
-    let uploadedImageUrl = imageUrl;
-
-    if (values.image && values.image.file) {
-      // If the user uploaded a new image, upload it to Firebase Storage
-      const file = values.image.file.originFileObj;
-      const fileRef = ref(storage, `images/${uuidv4()}_${file.name}`);
-      
-      try {
-        await uploadBytes(fileRef, file);
-        uploadedImageUrl = await getDownloadURL(fileRef); // Get the download URL of the uploaded image
-      } catch (error) {
-        message.error('Error uploading image');
-        setLoading(false);
-        return;
-      }
-    }
-
     try {
       if (editRecord) {
-        // If editing an existing record, update it
         await updateDoc(doc(db, category, editRecord.id), {
-          title: values.title,
-          description: values.description,
-          category: values.category,
-          imageUrl: uploadedImageUrl || "",
+          ...values,
           updatedAt: new Date(),
         });
-        message.success('Data updated successfully!');
+        message.success("Data updated successfully!");
       } else {
-        // If adding new data, create a new document
         await addDoc(collection(db, values.category), {
-          title: values.title,
-          description: values.description,
-          category: values.category,
+          ...values,
+
           userId: user.uid,
           createdAt: new Date(),
-          imageUrl: uploadedImageUrl || "", // Store image URL along with other data
         });
-        message.success('Data added successfully!');
+        message.success("Data added successfully!");
       }
-
-      fetchData(); // Refetch data
-      setIsModalVisible(false); // Close modal
-      setImageUrl(null); // Reset image URL state
+      fetchData();
+      setIsModalVisible(false);
     } catch (error) {
-      message.error('Error saving data: ' + error.message);
+      message.error("Error saving data");
     } finally {
       setLoading(false);
     }
   };
 
-  // Handle image upload
-  const handleImageUpload = (file) => {
-    return false; // Prevent automatic upload, we handle it manually later
-  };
-
-  // Handle delete action
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, category, id)); // Delete the document from Firestore
-      message.success('Data deleted successfully!');
-      fetchData(); // Refetch data after deletion
+      await deleteDoc(doc(db, category, id));
+      message.success("Data deleted successfully!");
+      fetchData();
     } catch (error) {
-      message.error('Error deleting data');
+      message.error("Error deleting data");
     }
   };
 
-  // Modal Form for Add/Edit Data
   const handleEdit = (record) => {
-    setEditRecord(record); // Set the record being edited
-    setImageUrl(record.imageUrl); // Set the image URL if editing
-    setIsModalVisible(true); // Show the modal
+    setEditRecord(record);
+    setIsModalVisible(true);
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false); // Close the modal
-    setEditRecord(null); // Reset the edit record state
-    setImageUrl(null); // Reset the image URL state
+    setIsModalVisible(false);
+    setEditRecord(null);
   };
+  console.log(data);
 
-  // Table columns for managing data
   const columns = [
-    { title: 'Title', dataIndex: 'title', key: 'title' },
-    { title: 'Description', dataIndex: 'description', key: 'description' },
-    { title: 'Category', dataIndex: 'category', key: 'category' },
+    { title: "Title",
+       dataIndex: "title",
+        key: "title",
+      render:(text)=>{
+        return  <h1 className="font-bold">{text}</h1>
+      }
+      },
     {
-      title: 'Actions',
-      key: 'actions',
+      title: "Image",
+      dataIndex: "imageUrl",
+      key: "imageUrl",
+      render: (images) => (
+        <div className="flex gap-2">
+          {images.map((image, index) => (
+            <div key={index} className="flex justify-center">
+              <img
+                src={image}
+                alt={`Image ${index + 1}`}
+                className="w-20 h-20 object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    { title: "Description", dataIndex: "description", key: "description" },
+    { title: "Category", dataIndex: "category", key: "category" },
+    {
+      title: "Actions",
+      key: "actions",
       render: (_, record) => (
-        <>
-          <Button type="link" onClick={() => handleEdit(record)}>Edit</Button>
+        <div className="flex gap-2">
+          <Button type="link" onClick={() => handleEdit(record)}>
+            Edit
+          </Button>
           <Popconfirm
             title="Are you sure?"
             onConfirm={() => handleDelete(record.id)}
             okText="Yes"
             cancelText="No"
           >
-            <Button type="link" danger>Delete</Button>
+            <Button type="link" danger>
+              Delete
+            </Button>
           </Popconfirm>
-        </>
+        </div>
       ),
     },
   ];
@@ -162,40 +166,37 @@ const Manage = () => {
   }
 
   return (
-    <div >
-        <Header />
-      {/* Category Selection */}
-      <Card  className='container max-w-7xl  mx-auto'>
-
-      <Select
-        defaultValue={category}
-        style={{ width: 200, marginBottom: '16px' }}
-        onChange={(value) => setCategory(value)}
-      >
-        {categories.map((cat) => (
-          <Select.Option key={cat.value} value={cat.value}>
-            {cat.label}
-          </Select.Option>
-        ))}
-      </Select>
-
-      {/* Add New Data Button */}
-      <Button type="primary" onClick={() => setIsModalVisible(true)}>
-        Add New Data
-      </Button>
-
-      {/* Data Table */}
-      <Table
-        columns={columns}
-        dataSource={data}
-        rowKey="id"
-        pagination={{ pageSize: 10 }}
-      />
-
-      {/* Modal Form for Add/Edit Data */}
+    <div>
+      <Header />
+      <Card className="container max-w-7xl mx-auto p-6">
+        <Select
+          defaultValue={category}
+          style={{ width: 200, marginBottom: "16px" }}
+          onChange={(value) => setCategory(value)}
+        >
+          {categories.map((cat) => (
+            <Select.Option key={cat.value} value={cat.value}>
+              {cat.label}
+            </Select.Option>
+          ))}
+        </Select>
+        <Button
+          type="primary"
+          onClick={() => setIsModalVisible(true)}
+          className="mb-4"
+        >
+          Add New Data
+        </Button>
+        <Table
+          columns={columns}
+          dataSource={data}
+          rowKey="id"
+          pagination={{ pageSize: 10 }}
+        />
+      </Card>
       <Modal
-        title={editRecord ? 'Edit Data' : 'Add New Data'}
-        visible={isModalVisible}
+        title={editRecord ? "Edit Data" : "Add New Data"}
+        open={isModalVisible}
         onCancel={handleCancel}
         footer={null}
       >
@@ -203,60 +204,83 @@ const Manage = () => {
           layout="vertical"
           onFinish={handleFormSubmit}
           initialValues={{
-            title: editRecord ? editRecord.title : '',
-            description: editRecord ? editRecord.description : '',
-            category: editRecord ? editRecord.category : 'news',
-            imageUrl: editRecord ? editRecord.imageUrl : '', // Set the initial image URL if editing
+            title: editRecord?.title || "",
+            description: editRecord?.description || "",
+            category: editRecord?.category || "news",
+            imageUrl: editRecord?.imageUrl || [],
           }}
         >
           <Form.Item
             label="Title"
             name="title"
-            rules={[{ required: true, message: 'Please input the title!' }]}
+            rules={[{ required: true, message: "Please input the title!" }]}
           >
             <Input />
           </Form.Item>
-
           <Form.Item
             label="Description"
             name="description"
-            rules={[{ required: true, message: 'Please input a description!' }]}
+            rules={[
+              { required: true, message: "Please input the description!" },
+            ]}
           >
             <Input.TextArea rows={4} />
           </Form.Item>
-
           <Form.Item
             label="Category"
             name="category"
-            rules={[{ required: true, message: 'Please select a category!' }]}
+            rules={[{ required: true, message: "Please select a category!" }]}
           >
             <Select>
-              {categories.map((category) => (
-                <Select.Option key={category.value} value={category.value}>
-                  {category.label}
+              {categories.map((cat) => (
+                <Select.Option key={cat.value} value={cat.value}>
+                  {cat.label}
                 </Select.Option>
               ))}
             </Select>
           </Form.Item>
-
-          <Form.Item label="Image" name="image">
-            <Upload
-              listType="picture"
-              showUploadList={false}
-              customRequest={handleImageUpload}
-            >
-              <Button>Upload Image</Button>
-            </Upload>
-            {imageUrl && <img src={imageUrl} alt="uploaded" style={{ width: '100%', marginTop: 16 }} />}
+          <Form.Item label="Images">
+            <Form.List name="imageUrl">
+              {(fields, { add, remove }) => (
+                <>
+                  {fields.map(({ key, name, fieldKey }) => (
+                    <Form.Item
+                      key={key}
+                      name={name}
+                      fieldKey={fieldKey}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input an image URL!",
+                        },
+                      ]}
+                    >
+                      <Input
+                        placeholder={`Image ${key + 1} URL`}
+                        className="mt-2"
+                        addonAfter={
+                          fields.length > 1 ? (
+                            <Button danger onClick={() => remove(name)}>
+                              Remove
+                            </Button>
+                          ) : null
+                        }
+                      />
+                    </Form.Item>
+                  ))}
+                  <Button type="dashed" onClick={() => add()} block>
+                    Add Image URL
+                  </Button>
+                </>
+              )}
+            </Form.List>
           </Form.Item>
 
-          <Button type="primary" htmlType="submit" loading={loading} block>
-            {editRecord ? 'Update Data' : 'Add Data'}
+          <Button type="primary" htmlType="submit" block loading={loading}>
+            {editRecord ? "Update Data" : "Add Data"}
           </Button>
         </Form>
       </Modal>
-      </Card>
-
     </div>
   );
 };
