@@ -17,14 +17,7 @@ import Image from "next/image";
 import Link from "next/link";
 export default function New() {
   const [data, setData] = useState();
-  const newsList = [
-    "Viện Kiểm sát Hàn Quốc điều tra cựu nghị sĩ đang cầm quyền về nghi ngờ can thiệp trong quá trình tiến cử",
-    "Một người Hàn Quốc nằm trong danh sách dự lễ trao giải Nobel Hòa bình 2024",
-    "Đảng cầm quyền Hàn Quốc có khả năng khởi động các cuộc thảo luận riêng với Chính phủ và giới y tế",
-    "Phó Tổng thống Mỹ chỉ trích cựu Tổng thống Donald Trump vì coi nhẹ đồng minh Hàn-Mỹ",
-    "Bắc Triều Tiên thành lập cơ quan mới đối phó với Hàn Quốc",
-  ];
-
+ 
   const fetchData = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "news"));
@@ -51,7 +44,15 @@ export default function New() {
       <div className="flex justify-between mx-auto max-w-7xl container">
         {/* Ô1  */}
         <div className="div1">
-          <h1> Thiết quân lệnh được ban hành hại Hàn Quốc </h1>
+          <h1 > Tổng thống Yoon bị triệu tập vào Giáng sinh 
+          <img src="https://vcdn1-vnexpress.vnecdn.net/2024/12/20/tong-thong-han-quoc-1734667836-5082-1734668096.jpg?w=1020&h=0&q=100&dpr=1&fit=crop&s=qCGCzFx4-mfeO0TSN1LGfg" alt="Homepage banner" className="w-200 h-auto" /> {/* Added alt and class for responsiveness */}
+      
+      {/* Container with background image */}
+          
+
+          </h1>
+
+          
         </div>
         {/* Ô 2 */}
         <div className="div2">
