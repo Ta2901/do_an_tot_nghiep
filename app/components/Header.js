@@ -84,6 +84,9 @@ export default function Header() {
             <li className="hover:bg-[#DFDED7] text-black px-4 rounded-md">
               <Link href="/pages/blog">Blog</Link>
             </li>
+            <li className="hover:bg-[#DFDED7] text-black px-4 rounded-md">
+              <Link href="/pages/more">More</Link>
+            </li>
 
             {/* Conditional Rendering for User Avatar or Login Button */}
             <li>
