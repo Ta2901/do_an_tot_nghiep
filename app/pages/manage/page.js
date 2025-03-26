@@ -24,6 +24,7 @@ import {
   doc,
 } from "firebase/firestore";
 import Header from "../../components/Header";
+import { useRouter } from "next/navigation"; // Import useRouter
 
 const categories = [
   { label: "News", value: "news" },
@@ -39,6 +40,7 @@ const Manage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editRecord, setEditRecord] = useState(null);
   const [category, setCategory] = useState("news");
+  const router = useRouter(); // Khởi tạo router
 
   // Fetch data when user logs in or category changes
   useEffect(() => {
@@ -120,7 +122,7 @@ const Manage = () => {
       key: "imageUrl",
       render: (images) => (
         <div className="flex gap-2">
-          {images.map((image, index) => (
+          {images?.map((image, index) => ( // Sử dụng optional chaining
             <div key={index} className="flex justify-center">
               <img
                 src={image}
@@ -167,7 +169,7 @@ const Manage = () => {
 
   return (
     <div>
-      <Header />
+        <Header router={router} /> {/* Truyền router vào Header */}
       <Card className="container max-w-7xl mx-auto p-6">
         <Select
           defaultValue={category}

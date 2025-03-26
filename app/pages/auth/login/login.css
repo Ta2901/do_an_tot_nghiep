@@ -1,0 +1,124 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0; /* Màu nền nhạt */
+  }
+  
+  .login_form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    width: 400px; /* Điều chỉnh chiều rộng form */
+  }
+  
+  .login_form h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .login_option {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .option a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    width: 48%; /* Chia đều không gian */
+  }
+  
+  .option img {
+    width: 20px;
+    margin-right: 10px;
+  }
+  
+  .separator {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #999;
+  }
+  
+  .separator span {
+    background-color: white;
+    padding: 0 10px;
+  }
+  
+  .input_box {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none; /* Loại bỏ đường viền khi focus */
+  }
+  
+  .password_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .password_title a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .sign_up {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .sign_up a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  .ant-input-password {
+    display: flex;
+    justify-content: space-between;
+}

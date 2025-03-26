@@ -25,3 +25,126 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Grid container for sections */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto; /* Thêm một hàng cho blog */
+  gap: 10px;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(217, 217, 217, 0.6);
+  height: 100px;
+  position: relative;
+  padding: 10px;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.title {
+  margin: 0 10px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.next-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+/* Blog section spans the entire width */
+.blog-section {
+  grid-column: 1 / -1; /* Chiếm toàn bộ chiều rộng */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+}
+/* Footer css */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+}
+
+footer h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer ul li {
+  margin-bottom: 5px;
+}
+
+/*VCI - VietNam Comprehensive Information*/
+.text-center {
+  text-align: center;
+}
+
+.text-4xl {
+  font-size: 2.5rem; /* Điều chỉnh kích thước font chữ */
+}
+
+.text-lg {
+  font-size: 1.2rem; /* Điều chỉnh kích thước font chữ */
+}
+
+.mt-8 {
+  margin-top: 2rem; /* Điều chỉnh khoảng cách */
+}
+h1 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 2rem; /* Giữ nguyên hoặc điều chỉnh kích thước font chữ cho h1 */
+}
+
+p {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.1rem; /* Giảm kích thước font chữ cho p */
+}
+/* thanh menu ko bị cuộn */
+nav.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100; /* Đảm bảo header nằm trên các phần tử khác */
+  /* Thêm các kiểu dáng khác cho header nếu cần */
+}
+
+body {
+  padding-top: 60px; /* Điều chỉnh giá trị này để tạo khoảng trống cho header */
+}

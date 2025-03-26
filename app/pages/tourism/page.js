@@ -4,6 +4,7 @@ import { db } from '../../libs/firebase'; // Import Firestore
 import { List, Card, Spin, message } from 'antd'; // Ant Design components for displaying data
 import { collection, query, getDocs } from 'firebase/firestore'; // Firestore query methods
 import Image from 'next/image'; // Import next/image for optimized image loading
+import Footer from '../../components/Footer';
 import './tour.css'
 import Header from '@/app/components/Header';
 function Tourism() {
@@ -108,6 +109,8 @@ function Tourism() {
         </div>
        
       </div>
+      {/* Thêm Footer ở cuối */}
+      <Footer />
     </div>
   );
 }

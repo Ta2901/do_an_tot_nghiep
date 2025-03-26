@@ -1,0 +1,64 @@
+.health-page {
+    font-family: sans-serif;
+    color: #333;
+  }
+  
+  .health-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f0f0f0;
+  }
+  
+  .health-nav-list {
+    list-style: none;
+    display: flex;
+  }
+  
+  .health-nav-item {
+    margin-right: 1rem;
+  }
+  
+  .health-nav-link {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .health-user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .health-user-name {
+    margin-right: 0.5rem;
+  }
+  
+  .health-banner {
+    text-align: center;
+    padding: 2rem;
+    background-color: #e0e0e0;
+  }
+  
+  .health-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .health-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .health-content {
+    padding: 2rem;
+  }
+  
+  .health-section {
+    margin-bottom: 2rem;
+  }
+  
+  .health-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }

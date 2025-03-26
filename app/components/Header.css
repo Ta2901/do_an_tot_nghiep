@@ -1,0 +1,76 @@
+.menu-container {
+    width: 250px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .close-button svg {
+    width: 20px;
+    height: 20px;
+    color: gray;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .user-details {
+    font-size: 14px;
+  }
+  
+  .user-name {
+    font-weight: bold;
+  }
+  
+  .user-email {
+    color: gray;
+  }
+  
+  .menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .menu-item svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+  
+  .menu-footer {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    color: gray;
+    cursor: pointer;
+  }
+  
+  .menu-footer svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
